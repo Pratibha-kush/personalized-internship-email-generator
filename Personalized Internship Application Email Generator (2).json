@@ -1,0 +1,434 @@
+{
+    "name": "Personalized Internship Application Email Generator",
+    "nodes": [{
+            "parameters": {
+                "documentId": {
+                    "__rl": true,
+                    "value": "YOUR_GOOGLE_SHEET_ID",
+                    "mode": "list",
+                    "cachedResultName": "Internship Outreach",
+                    "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1_XFsrVEkzNUojTN5AYOOEjQSEokBiFBu2_kpAlf8ApE/edit?usp=drivesdk"
+                },
+                "sheetName": {
+                    "__rl": true,
+                    "value": "gid=0",
+                    "mode": "list",
+                    "cachedResultName": "Sheet1",
+                    "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1_XFsrVEkzNUojTN5AYOOEjQSEokBiFBu2_kpAlf8ApE/edit#gid=0"
+                },
+                "options": {}
+            },
+            "id": "4f9979b2-1970-442e-a185-350cf76961dd",
+            "name": "Get Company Details",
+            "type": "n8n-nodes-base.googleSheets",
+            "typeVersion": 4.5,
+            "position": [-1104,
+                48
+            ],
+            "credentials": {
+                "googleSheetsOAuth2Api": {
+                    "name": "Google Sheets account"
+                }
+            }
+        },
+        {
+            "parameters": {
+                "conditions": {
+                    "options": {
+                        "caseSensitive": true,
+                        "leftValue": "",
+                        "typeValidation": "loose",
+                        "version": 1
+                    },
+                    "conditions": [{
+                        "id": "id-1",
+                        "leftValue": "={{ $json.Status }}",
+                        "rightValue": "Pending",
+                        "operator": {
+                            "type": "string",
+                            "operation": "equals"
+                        }
+                    }],
+                    "combinator": "and"
+                },
+                "options": {
+                    "looseTypeValidation": true
+                }
+            },
+            "id": "689ee7df-2590-4caa-9d57-9fd1a609dd15",
+            "name": "Filter Pending Applications",
+            "type": "n8n-nodes-base.if",
+            "typeVersion": 2,
+            "position": [-880,
+                48
+            ]
+        },
+        {
+            "parameters": {
+                "operation": "update",
+                "documentId": {
+                    "__rl": true,
+                    "value": "1_XFsrVEkzNUojTN5AYOOEjQSEokBiFBu2_kpAlf8ApE",
+                    "mode": "list",
+                    "cachedResultName": "Internship Outreach",
+                    "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1_XFsrVEkzNUojTN5AYOOEjQSEokBiFBu2_kpAlf8ApE/edit?usp=drivesdk"
+                },
+                "sheetName": {
+                    "__rl": true,
+                    "value": "gid=0",
+                    "mode": "list",
+                    "cachedResultName": "Sheet1",
+                    "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1_XFsrVEkzNUojTN5AYOOEjQSEokBiFBu2_kpAlf8ApE/edit#gid=0"
+                },
+                "columns": {
+                    "mappingMode": "defineBelow",
+                    "value": {
+                        "row_number": "={{$json[\"row_number\"]}}",
+                        "Status": "Sent"
+                    },
+                    "matchingColumns": [
+                        "row_number"
+                    ],
+                    "schema": [{
+                            "id": "row_number",
+                            "displayName": "row_number",
+                            "required": false,
+                            "defaultMatch": false,
+                            "display": true,
+                            "type": "string",
+                            "canBeUsedToMatch": true,
+                            "removed": false
+                        },
+                        {
+                            "id": "Company Name",
+                            "displayName": "Company Name",
+                            "required": false,
+                            "defaultMatch": false,
+                            "display": true,
+                            "type": "string",
+                            "canBeUsedToMatch": true,
+                            "removed": true
+                        },
+                        {
+                            "id": "Role",
+                            "displayName": "Role",
+                            "required": false,
+                            "defaultMatch": false,
+                            "display": true,
+                            "type": "string",
+                            "canBeUsedToMatch": true,
+                            "removed": true
+                        },
+                        {
+                            "id": "HR Name",
+                            "displayName": "HR Name",
+                            "required": false,
+                            "defaultMatch": false,
+                            "display": true,
+                            "type": "string",
+                            "canBeUsedToMatch": true,
+                            "removed": true
+                        },
+                        {
+                            "id": "HR Email",
+                            "displayName": "HR Email",
+                            "required": false,
+                            "defaultMatch": false,
+                            "display": true,
+                            "type": "string",
+                            "canBeUsedToMatch": true,
+                            "removed": true
+                        },
+                        {
+                            "id": "Status",
+                            "displayName": "Status",
+                            "required": false,
+                            "defaultMatch": false,
+                            "display": true,
+                            "type": "string",
+                            "canBeUsedToMatch": true,
+                            "removed": false
+                        },
+                        {
+                            "id": "id",
+                            "displayName": "id",
+                            "required": false,
+                            "defaultMatch": true,
+                            "display": true,
+                            "type": "string",
+                            "canBeUsedToMatch": true,
+                            "removed": true
+                        },
+                        {
+                            "id": "threadId",
+                            "displayName": "threadId",
+                            "required": false,
+                            "defaultMatch": false,
+                            "display": true,
+                            "type": "string",
+                            "canBeUsedToMatch": true,
+                            "removed": true
+                        },
+                        {
+                            "id": "labelIds",
+                            "displayName": "labelIds",
+                            "required": false,
+                            "defaultMatch": false,
+                            "display": true,
+                            "type": "string",
+                            "canBeUsedToMatch": true,
+                            "removed": true
+                        }
+                    ],
+                    "attemptToConvertTypes": false,
+                    "convertFieldsToString": false
+                },
+                "options": {}
+            },
+            "id": "9ca8cf6f-8540-4b3f-b1ba-0d355adca4fa",
+            "name": "Update Status to Sent",
+            "type": "n8n-nodes-base.googleSheets",
+            "typeVersion": 4.5,
+            "position": [
+                576,
+                96
+            ],
+            "credentials": {
+                "googleSheetsOAuth2Api": {
+                    "name": "Google Sheets account"
+                }
+            }
+        },
+        {
+            "parameters": {
+                "promptType": "define",
+                "text": "=You are a senior corporate communication specialist.\n\nGenerate a refined, professional internship application email using the details below.\n\nCandidate Details:\nName: Candidate Name\nDegree: B.Tech Computer Science Engineering (3rd Year)\nCollege: Shri Vaishnav Vidyapeeth Vishwavidyalaya, Indore\nCore Skills: Java, Object-Oriented Programming, Data Structures & Algorithms\nAdditional Skills: HTML, CSS, UI/UX Design, C/C++, Python\nPrimary Interests: Java Development, Backend Development, Frontend Development\nEmail: candidate@example.com\nPhone: +91 XXXXXXXXXX\n\nCompany Details:\nCompany Name: {{ $json['Company Name'] }}\nRole: {{ $json['Role'] }}\nHR Name: {{ $json['HR Name'] || 'Hiring Manager' }}\n\nInstructions:\n- Maintain a professional and confident tone suitable for corporate companies.\n- Keep the email between 150–200 words.\n- Personalize the introduction mentioning the company name.\n- Express interest in the specific role.\n- Highlight Java, OOP, and Data Structures.\n- Show enthusiasm for learning and contributing.\n- Mention that my resume is attached for your review.\n- End with a polite call to action.\n- Do not sound robotic.\n- Avoid generic phrases.\n\nOutput format:\n\n\n\n<email body only without repeating the subject>"
+            },
+            "id": "4c54debc-d8f1-430b-9ae9-a579b2099e80",
+            "name": "Generate Email",
+            "type": "@n8n/n8n-nodes-langchain.chainLlm",
+            "typeVersion": 1.4,
+            "position": [-608,
+                128
+            ],
+            "alwaysOutputData": true
+        },
+        {
+            "parameters": {
+                "model": "groq/compound-mini",
+                "options": {}
+            },
+            "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+            "typeVersion": 1,
+            "position": [-544,
+                352
+            ],
+            "id": "43387c03-2d52-484b-aa18-46c9ac260f0a",
+            "name": "Groq Chat Model",
+            "credentials": {
+                "groqApi": {
+                    "name": "Groq account"
+                }
+            }
+        },
+        {
+            "parameters": {
+                "sendTo": "={{$json[\"HR_Email\"]}}",
+                "subject": "=Application for {{$json[\"Role\"]}} Internship – Candidate Name",
+                "emailType": "text",
+                "message": "={{$json[\"text\"]}}",
+                "options": {
+                    "attachmentsUi": {
+                        "attachmentsBinary": [
+                            {}
+                        ]
+                    }
+                }
+            },
+            "type": "n8n-nodes-base.gmail",
+            "typeVersion": 2.2,
+            "position": [
+                48,
+                112
+            ],
+            "id": "b8d7db04-0913-4b51-bf55-62c8e730cf5e",
+            "name": "Send a message",
+            "webhookId": "fdb046e7-91a9-444c-8baf-2d13124d8cce",
+            "credentials": {
+                "gmailOAuth2": {
+                    "name": "Gmail account"
+                }
+            }
+        },
+        {
+            "parameters": {
+                "mode": "combine",
+                "combineBy": "combineByPosition",
+                "options": {}
+            },
+            "type": "n8n-nodes-base.merge",
+            "typeVersion": 3.2,
+            "position": [-128, -96],
+            "id": "23d8e50e-d3fb-430e-b953-848dc1b0c39b",
+            "name": "Merge"
+        },
+        {
+            "parameters": {
+                "mode": "combine",
+                "combineBy": "combineByPosition",
+                "options": {}
+            },
+            "type": "n8n-nodes-base.merge",
+            "typeVersion": 3.2,
+            "position": [
+                320,
+                96
+            ],
+            "id": "e43fdd29-6068-476f-a63b-2ed7ef327373",
+            "name": "Merge1"
+        },
+        {
+            "parameters": {},
+            "id": "a432beaa-faea-454f-92d1-0d9bcda07e6a",
+            "name": "Manual Trigger",
+            "type": "n8n-nodes-base.manualTrigger",
+            "typeVersion": 1,
+            "position": [-1328,
+                48
+            ]
+        },
+        {
+            "parameters": {
+                "operation": "download",
+                "fileId": {
+                    "__rl": true,
+                    "value": "YOUR_RESUME_FILE_ID",
+                    "mode": "list",
+                    "cachedResultName": "resume.pdf",
+                    "cachedResultUrl": "https://drive.google.com/file/d/1DTloR4aN4oSQbJ3uftqwFqOaXmcg555x/view?usp=drivesdk"
+                },
+                "options": {}
+            },
+            "type": "n8n-nodes-base.googleDrive",
+            "typeVersion": 3,
+            "position": [-272,
+                112
+            ],
+            "id": "487a0c55-0ed4-4cdd-b5f8-94ac46f54337",
+            "name": "Download file",
+            "credentials": {
+                "googleDriveOAuth2Api": {
+                    "name": "Google Drive account"
+                }
+            }
+        }
+    ],
+    "pinData": {},
+    "connections": {
+        "Get Company Details": {
+            "main": [
+                [{
+                    "node": "Filter Pending Applications",
+                    "type": "main",
+                    "index": 0
+                }]
+            ]
+        },
+        "Filter Pending Applications": {
+            "main": [
+                [{
+                        "node": "Generate Email",
+                        "type": "main",
+                        "index": 0
+                    },
+                    {
+                        "node": "Merge",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Generate Email": {
+            "main": [
+                [{
+                    "node": "Download file",
+                    "type": "main",
+                    "index": 0
+                }]
+            ]
+        },
+        "Groq Chat Model": {
+            "ai_languageModel": [
+                [{
+                    "node": "Generate Email",
+                    "type": "ai_languageModel",
+                    "index": 0
+                }]
+            ]
+        },
+        "Send a message": {
+            "main": [
+                [{
+                    "node": "Merge1",
+                    "type": "main",
+                    "index": 1
+                }]
+            ]
+        },
+        "Merge": {
+            "main": [
+                [{
+                        "node": "Send a message",
+                        "type": "main",
+                        "index": 0
+                    },
+                    {
+                        "node": "Merge1",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Merge1": {
+            "main": [
+                [{
+                    "node": "Update Status to Sent",
+                    "type": "main",
+                    "index": 0
+                }]
+            ]
+        },
+        "Manual Trigger": {
+            "main": [
+                [{
+                    "node": "Get Company Details",
+                    "type": "main",
+                    "index": 0
+                }]
+            ]
+        },
+        "Download file": {
+            "main": [
+                [{
+                    "node": "Merge",
+                    "type": "main",
+                    "index": 1
+                }]
+            ]
+        }
+    },
+    "active": true,
+    "settings": {
+        "executionOrder": "v1",
+        "binaryMode": "separate"
+    },
+    "versionId": "7326acd3-8417-405b-bd48-98ffc3feac2e",
+    "meta": {
+        "templateCredsSetupCompleted": true,
+        "instanceId": "3300ab0a63be2ba3164950503b1be241af730fe468271ff1b6980a667654e193"
+    },
+    "id": "bfiyp4tsTQp9y7wG",
+    "tags": []
+}
